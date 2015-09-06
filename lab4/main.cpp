@@ -1,11 +1,12 @@
 #include <pthread.h>
 #include <iostream>
+#include <unistd.h>
 
 using namespace std;
 
 void *childFunction(void *) {
-	for (int i = 0; i < 10; ++i) {
-		cout << "Hello, it's child!" << endl;
+	while(true) {
+		printf("Hello\n");
 	}
 }
 
@@ -16,8 +17,6 @@ int main() {
 		perror("pthread_create");
 		exit(EXIT_FAILURE);
 	}
-	for (int i = 0; i < 10; ++i) {
-		cout << "Hello, it's parent!" << endl;
-	}
-	pthread_exit(EXIT_SUCCESS);
+	sleep(2);
+	pthread_cancel(thread_id);
 }

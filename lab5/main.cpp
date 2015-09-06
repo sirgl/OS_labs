@@ -1,12 +1,19 @@
 #include <pthread.h>
 #include <iostream>
+#include <unistd.h>
 
 using namespace std;
 
+void cancellationHandler(void*) {
+	printf("interrupted!\n");
+}
+
 void *childFunction(void *) {
-	for (int i = 0; i < 10; ++i) {
-		cout << "Hello, it's child!" << endl;
+	pthread_cleanup_push(cancellationHandler, 0);
+	while(true) {
+		printf("Hello\n");
 	}
+	pthread_cleanup_pop(0);
 }
 
 int main() {
@@ -16,8 +23,6 @@ int main() {
 		perror("pthread_create");
 		exit(EXIT_FAILURE);
 	}
-	for (int i = 0; i < 10; ++i) {
-		cout << "Hello, it's parent!" << endl;
-	}
-	pthread_exit(EXIT_SUCCESS);
+	sleep(2);
+	pthread_cancel(thread_id);
 }

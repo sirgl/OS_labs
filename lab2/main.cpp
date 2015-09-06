@@ -19,5 +19,5 @@ int main() {
 	for (int i = 0; i < 10; ++i) {
 		cout << "Hello, it's parent!" << endl;
 	}
-	pthread_exit(EXIT_SUCCESS);
+	pthread_join(thread_id, NULL);
 }
