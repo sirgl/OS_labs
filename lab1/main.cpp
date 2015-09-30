@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void *childFunction(void *) {
+void *calc(void *) {
 	for (int i = 0; i < 10; ++i) {
 		cout << "Hello, it's child!" << endl;
 	}
@@ -11,7 +11,7 @@ void *childFunction(void *) {
 
 int main() {
 	pthread_t thread_id;
-	int code = pthread_create(&thread_id, NULL, childFunction, NULL);
+	int code = pthread_create(&thread_id, NULL, calc, NULL);
 	if (code != 0) {
 		perror("pthread_create");
 		exit(EXIT_FAILURE);
