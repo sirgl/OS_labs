@@ -10,10 +10,10 @@ void cancellationHandler(void*) {
 
 void *calc(void *ds) {
 	pthread_cleanup_push(cancellationHandler, 0);
-	while(1) {
+//	while(1) {
 		write(1, "Hello\n", 7);
-	}
-	pthread_cleanup_pop(0);
+//	}
+	pthread_cleanup_pop(1);
 }
 
 int main() {
@@ -24,6 +24,7 @@ int main() {
 		exit(EXIT_FAILURE);
 	}
 	sleep(2);
-	pthread_cancel(thread_id);
+//	pthread_cancel(thread_id);
 	pthread_join(thread_id, NULL);
+//	pthread_exit(EXIT)
 }

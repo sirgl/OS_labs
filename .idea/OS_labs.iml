@@ -5,6 +5,9 @@
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab1/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab10/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lab12/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lab13/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lab15/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab2/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab3/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab4/main.cpp" isTestSource="false" />

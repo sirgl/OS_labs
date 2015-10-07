@@ -1,37 +1,75 @@
 #include <pthread.h>
 #include <stdio.h>
-
-#include <unistd.h>
 #include <stdlib.h>
 
-const int ITERATIONS = 1000000;
+const int ITERATIONS = 10000000;
 
-struct Parameter{
+
+int threadCount;
+
+struct Parameter {
 	int index;
 	double result;
 };
 
-void cancellationHandler(void*) {
-	
-}
-
 void *calc(void *param) {
-	Parameter* parameter = (Parameter *) param;
+	Parameter *parameter = (Parameter *) param;
 	double result = 0;
-	for (int i = 0; i < ITERATIONS; ++i) {
+	for (int i = parameter->index; i < ITERATIONS; i += threadCount) {
 		result += 1.0 / (i * 4.0 + 1.0);
 		result -= 1.0 / (i * 4.0 + 3.0);
 	}
+	parameter->result = result;
+	return parameter;
 }
 
-int main() {
-	pthread_t thread_id;
-	int code = pthread_create(&thread_id, NULL, calc, NULL);
-	if (code != 0) {
-		perror("pthread_create");
-		exit(EXIT_FAILURE);
+int main(int argc, char **argv) {
+	if (2 != argc) {
+		fprintf(stderr, "Not enough arguments");
+		return EXIT_FAILURE;
 	}
-	sleep(2);
-	pthread_cancel(thread_id);
-	pthread_join(thread_id, NULL);
+
+	threadCount = atoi(argv[1]);
+
+	pthread_t threads[threadCount];
+	Parameter **parameters = (Parameter **) malloc(sizeof(Parameter *) * threadCount);
+	if (NULL == parameters) {
+		fprintf(stderr, "Not enough memory");
+		return EXIT_FAILURE;
+	}
+	for (int j = 0; j < threadCount; ++j) {
+		parameters[j] = (Parameter *) malloc(sizeof(Parameter));
+		if (NULL == parameters[j]) {
+			fprintf(stderr, "Not enough memory");
+			return EXIT_FAILURE;
+		}
+		parameters[j]->index = j;
+		parameters[j]->result = 0;
+	}
+
+
+	for (int i = 0; i < threadCount; ++i) {
+		int error = pthread_create(&threads[i], NULL, calc, parameters[i]);
+		if (error) {
+			fprintf(stderr, "error while creating threads");
+			return EXIT_FAILURE;
+		}
+	}
+
+	double pi = 0;
+
+	for (int i = 0; i < threadCount; ++i) {
+		Parameter *retValue;
+		int error = pthread_join(threads[i], (void **) &retValue);
+		if (error) {
+			fprintf(stderr, "error while creating threads");
+			return EXIT_FAILURE;
+		}
+		pi += retValue->result;
+		free(retValue);
+	}
+	pi *= 4.0;
+	printf("%.10lf\n", pi);
+	free(parameters);
+	return EXIT_SUCCESS;
 }
