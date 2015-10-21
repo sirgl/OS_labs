@@ -34,3 +34,6 @@ target_link_libraries(OS_lab13 ${CMAKE_THREAD_LIBS_INIT})
 
 add_executable(OS_lab15 lab15/main.cpp)
 target_link_libraries(OS_lab15 ${CMAKE_THREAD_LIBS_INIT})
+
+add_executable(OS_lab16 lab16/main.cpp lab16/list.cpp)
+target_link_libraries(OS_lab16 ${CMAKE_THREAD_LIBS_INIT})
