@@ -11,6 +11,9 @@
       <sourceFolder url="file://$MODULE_DIR$/lab16/list.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab16/list.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab16/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lab19/list.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lab19/list.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lab19/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab2/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab3/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab4/main.cpp" isTestSource="false" />
