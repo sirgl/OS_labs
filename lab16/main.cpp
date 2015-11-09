@@ -26,6 +26,8 @@ int main(int argc, char **argv) {
 	char buffer[MAX_STRING_LENGTH + 1];
 
 	ssize_t readSize;
+	pthread_t t;
+	pthread_create(&t, NULL, childFunction, list);
 	for(;;) {
 		readSize = read(0, buffer, MAX_STRING_LENGTH - 1);
 		if(0 == readSize) {
