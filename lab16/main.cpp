@@ -6,11 +6,20 @@
 
 static const int MAX_STRING_LENGTH = 80;
 
+const int BUFFER_SIZE = 256;
+
+void printError(int error) {
+	char buffer[BUFFER_SIZE];
+	strerror_r(error, buffer, sizeof buffer);
+	fprintf(stderr, "%s\n", buffer);
+}
+
 void* childFunction(void* parameter) {
 	List* list = (List *) parameter;
 	while(!list->interrupted) {
 		sleep(5);
 		sort(list);
+		fprintf(stdout, "Sorted\n");
 	}
 	pthread_mutex_destroy(&list->mutex);
 	free(list);
@@ -27,7 +36,12 @@ int main(int argc, char **argv) {
 
 	ssize_t readSize;
 	pthread_t t;
-	pthread_create(&t, NULL, childFunction, list);
+	int error = pthread_create(&t, NULL, childFunction, list);
+	if(error) {
+		printError(error);
+		return EXIT_FAILURE;
+	}
+
 	for(;;) {
 		readSize = read(0, buffer, MAX_STRING_LENGTH - 1);
 		if(0 == readSize) {
@@ -43,9 +57,11 @@ int main(int argc, char **argv) {
 		}
 		char* entryString = (char *) malloc((readSize + 1) * sizeof(char));
 		if(NULL == entryString) {
-
+			fprintf(stderr, "No memory");
+			freeList(list);
+			pthread_exit((void *) EXIT_FAILURE);
 		}
-		strcpy(entryString, buffer);
+		strncpy(entryString, buffer, strlen(buffer) - 1);
 
 		ListEntry *entry = createListEntry(entryString);
 		if(NULL == entry) {
@@ -56,7 +72,7 @@ int main(int argc, char **argv) {
 		addEntryToList(list, entry);
 	}
 
+	pthread_join(t, NULL);
 	freeList(list);
 	pthread_exit((void *) EXIT_FAILURE);
-
 }

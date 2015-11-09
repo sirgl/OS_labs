@@ -93,9 +93,3 @@ void freeList(List* list) {
 
 	pthread_rwlock_unlock(&list->lock);
 }
-
-void printError(int error) {
-	char buffer[BUFFER_SIZE];
-	strerror_r(error, buffer, sizeof buffer);
-	fprintf(stderr, "%s\n", buffer);
-}

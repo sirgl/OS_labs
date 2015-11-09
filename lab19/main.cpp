@@ -6,14 +6,23 @@
 
 static const int MAX_STRING_LENGTH = 80;
 
+const int BUFFER_SIZE = 256;
+
 void* childFunction(void* parameter) {
 	List* list = (List *) parameter;
 	while(!list->interrupted) {
 		sleep(5);
 		sort(list);
+		fprintf(stdout, "Sorted\n");
 	}
 	pthread_rwlock_destroy(&list->lock);
 	free(list);
+}
+
+void printError(int error) {
+	char buffer[BUFFER_SIZE];
+	strerror_r(error, buffer, sizeof buffer);
+	fprintf(stderr, "%s\n", buffer);
 }
 
 int main(int argc, char **argv) {
@@ -24,6 +33,13 @@ int main(int argc, char **argv) {
 	}
 
 	char buffer[MAX_STRING_LENGTH + 1];
+
+	pthread_t t;
+	int error = pthread_create(&t, NULL, childFunction, list);
+	if(error) {
+		printError(error);
+		return EXIT_FAILURE;
+	}
 
 	ssize_t readSize;
 	for(;;) {
@@ -41,7 +57,9 @@ int main(int argc, char **argv) {
 		}
 		char* entryString = (char *) malloc((readSize + 1) * sizeof(char));
 		if(NULL == entryString) {
-
+			fprintf(stderr, "No memory");
+			freeList(list);
+			pthread_exit((void *) EXIT_FAILURE);
 		}
 		strcpy(entryString, buffer);
 
@@ -54,6 +72,7 @@ int main(int argc, char **argv) {
 		addEntryToList(list, entry);
 	}
 
+	pthread_join(t, NULL);
 	freeList(list);
 	pthread_exit((void *) EXIT_FAILURE);
 

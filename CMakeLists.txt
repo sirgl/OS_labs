@@ -44,6 +44,9 @@ target_link_libraries(OS_lab19 ${CMAKE_THREAD_LIBS_INIT})
 add_executable(OS_lab22 lab22/main.cpp lab22/myQueue.cpp lab22/detail_type.h)
 target_link_libraries(OS_lab22 ${CMAKE_THREAD_LIBS_INIT})
 
+add_executable(OS_lab23 lab23/main.cpp lab23/myQueue.cpp lab23/myQueue.h)
+target_link_libraries(OS_lab23 ${CMAKE_THREAD_LIBS_INIT})
+
 add_executable(OS_lab24 lab24/main.cpp lab24/myQueue.cpp lab24/myQueue.h)
 target_link_libraries(OS_lab24 ${CMAKE_THREAD_LIBS_INIT})
 

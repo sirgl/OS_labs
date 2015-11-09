@@ -94,9 +94,3 @@ void freeList(List* list) {
 	pthread_mutex_unlock(&list->mutex);
 
 }
-
-void printError(int error) {
-	char buffer[BUFFER_SIZE];
-	strerror_r(error, buffer, sizeof buffer);
-	fprintf(stderr, "%s\n", buffer);
-}

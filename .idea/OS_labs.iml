@@ -18,6 +18,9 @@
       <sourceFolder url="file://$MODULE_DIR$/lab22/detail_type.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab22/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab22/myQueue.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lab23/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lab23/myQueue.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lab23/myQueue.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab24/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab24/myQueue.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab24/myQueue.h" isTestSource="false" />
