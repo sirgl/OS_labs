@@ -49,6 +49,7 @@ void sort(List* list) {
 	pthread_mutex_lock(&list->mutex);
 
 	if (NULL == list->head) {
+		pthread_mutex_unlock(&list->mutex);
 		return;
 	}
 	for (ListEntry* i = list->head; NULL != i; i = i->next) {

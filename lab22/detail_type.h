@@ -8,22 +8,20 @@ typedef struct DetailType {
 } DetailType;
 
 
-typedef struct ArgumentsProduceFromComponents {
-	DetailType *comp1;
-	DetailType *comp2;
+typedef struct ArgumentsComposeFromComponents {
+	DetailType **comp;
+	int componentsCount;
 	DetailType *result;
-} ArgumentsProduceFromComponents;
+} ArgumentsComposeFromComponents;
 
 typedef struct ArgumentsProduce {
 	DetailType *detail;
 	unsigned int delay;
-} Arguments;
+};
 
 DetailType *initDetail(char *name);
 
-void produceFromComponents(ArgumentsProduceFromComponents* arguments);
-
-void destroyDetail(DetailType *detail);
+void composeFromComponents(ArgumentsComposeFromComponents *arguments);
 
 void produce(ArgumentsProduce* arguments);
 

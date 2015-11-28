@@ -32,13 +32,14 @@ void produce(ArgumentsProduce* arguments) {
 	}
 }
 
-void produceFromComponents(ArgumentsProduceFromComponents* arguments) {
-	DetailType *comp1 = arguments->comp1;
-	DetailType *comp2 = arguments->comp2;
+void composeFromComponents(ArgumentsComposeFromComponents *arguments) {
+	DetailType **components = arguments->comp;
 	DetailType *result = arguments->result;
+	int componentsCount = arguments->componentsCount;
 	for(;;) {
-		sem_wait(&comp1->produced);
-		sem_wait(&comp2->produced);
+		for (int i = 0; i < componentsCount; ++i) {
+			sem_wait(&components[i]->produced);
+		}
 		sem_post(&result->produced);
 		printf("Produced %s\n", result->name);
 	}

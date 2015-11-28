@@ -6,7 +6,7 @@
 
 class Forwarder {
 
-	in_port_t host_port;
+	in_port_t forw_port;
 	in_port_t server_port;
 	int server_socket;
 	struct sockaddr_in server_address;
@@ -17,7 +17,7 @@ class Forwarder {
 
 public:
 
-	Forwarder(in_port_t listen_port, in_addr forw_addr, in_port_t host_port);
+	Forwarder(in_port_t listen_port, in_addr forw_addr, in_port_t forw_port);
 
 	virtual ~Forwarder();
 

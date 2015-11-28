@@ -4,20 +4,22 @@
 #include "tools.h"
 
 
-Forwarder::Forwarder(in_port_t listen_port, in_addr forw_addr, in_port_t host_port) :
+Forwarder::Forwarder(in_port_t listen_port, in_addr forw_addr, in_port_t forw_port) :
 		server_port(htons(listen_port)),
-		host_port(htons(host_port)) {
+		forw_port(htons(forw_port)) {
 	server_address.sin_family = AF_INET;
 	server_address.sin_port = server_port;
 	forwarding_address.sin_addr = forw_addr;
 	forwarding_address.sin_family = AF_INET;
-	forwarding_address.sin_port = this->host_port;
+	forwarding_address.sin_port = this->forw_port;
 	FD_ZERO(&read_set);
 	FD_ZERO(&write_set);
 	server_socket = socket(AF_INET, SOCK_STREAM, 0);
 	if (-1 == server_socket) {
 		throw std::runtime_error("Failed to create socket: " + get_error(errno));
 	}
+	int optval = 1;
+	setsockopt(server_socket, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof(optval));
 }
 
 

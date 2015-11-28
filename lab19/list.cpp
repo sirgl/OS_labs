@@ -49,6 +49,7 @@ void sort(List* list) {
 	pthread_rwlock_wrlock(&list->lock);
 
 	if (NULL == list->head) {
+		pthread_rwlock_unlock(&list->lock);
 		return;
 	}
 	for (ListEntry* i = list->head; NULL != i; i = i->next) {

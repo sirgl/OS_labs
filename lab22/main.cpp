@@ -22,7 +22,8 @@ int main(int argc, char **argv) {
 	ArgumentsProduce arguments[3];
 	int error;
 	for (unsigned int i = 0; i < 3; ++i) {
-		arguments[i] = {details[i], i + 1};
+		arguments[i].detail = details[i];
+		arguments[i].delay = i + 1;
 		error = pthread_create(&threads[i], NULL, (void *(*)(void *)) produce, &arguments[i]);
 		if(error) {
 			printError(error);
@@ -30,15 +31,17 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	ArgumentsProduceFromComponents args1 = {details[0], details[1], details[3]};
-	error = pthread_create(&threads[3], NULL, (void *(*)(void *)) produceFromComponents, &args1);
+	DetailType* detailsArgs1[2] = {details[0], details[1]};
+	ArgumentsComposeFromComponents args1 = {detailsArgs1, 2, details[3]};
+	error = pthread_create(&threads[3], NULL, (void *(*)(void *)) composeFromComponents, &args1);
 	if(error) {
 		printError(error);
 		exit(EXIT_FAILURE);
 	}
 
-	ArgumentsProduceFromComponents args2 = {details[3], details[2], details[4]};
-	error = pthread_create(&threads[3], NULL, (void *(*)(void *)) produceFromComponents, &args2);
+	DetailType* detailsArgs2[2] = {details[2], details[3]};
+	ArgumentsComposeFromComponents args2 = {detailsArgs2, 2, details[4]};
+	error = pthread_create(&threads[3], NULL, (void *(*)(void *)) composeFromComponents, &args2);
 	if(error) {
 		printError(error);
 		exit(EXIT_FAILURE);

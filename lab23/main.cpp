@@ -20,7 +20,7 @@ void *producerFunction(void *parameter) {
 	char *name = ((Argument *) parameter)->name;
 	char buffer[50];
 	for (int i = 0; i < 100000; ++i) {
-		sleep(0);
+		sleep(1);
 		sprintf(buffer, "%s_%d", name, i);
 		mymsgput(queue, buffer);
 	}

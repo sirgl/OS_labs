@@ -18,13 +18,11 @@ struct Connection {
 			forwarding_socket(forwarding_socket),
 			forward_to_client_data_size(0),
 			client_to_forward_data_size(0) {
-		std::cout << "Connecion created\n";
 	}
 
 	virtual ~Connection() {
 		close(client_socket);
 		close(forwarding_socket);
-		std::cout << "Connecion deleted\n";
 	}
 
 

@@ -11,13 +11,16 @@
       <sourceFolder url="file://$MODULE_DIR$/lab16/list.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab16/list.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab16/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lab17/list.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lab17/list.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lab17/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab19/list.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab19/list.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab19/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab2/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lab22/detail_type.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab22/detail_type.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab22/main.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/lab22/myQueue.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab23/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab23/myQueue.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lab23/myQueue.h" isTestSource="false" />
